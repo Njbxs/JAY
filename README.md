@@ -4,7 +4,7 @@
 
 `cd`
 
-`pyhton3 -m venv jay`
+`python3 -m venv jay`
 
 `. . jay/bin/activate`
 
