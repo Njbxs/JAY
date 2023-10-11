@@ -56,7 +56,7 @@ start_msg = """
 <b>Hallo {}, saya adalah {} 
 yang mempermudah kalian untuk membuat file sharing bot 
 tanpa harus memiliki vps/heroku sendiri
-Silahkan klik tombol dibawah ini untuk memulainya\n\nNote : Jika kamu tidak bisa mendeploy sendiri, kamu bisa menghubungi salah satu seller yang tertera di bot ini</b>
+Silahkan klik tombol dibawah ini untuk memulainya\n\nNote : Jika kamu tidak bisa mendeploy sendiri, kamu bisa menghubungi salah satu admin yang tertera di bot ini</b>
 """
 
 but_tutor = [
@@ -176,7 +176,7 @@ async def start_bot(c, m):
         if msgs:
             text = msgs
         else:
-            text = "<b>Hello {user}\n\nAnda harus bergabung di Channel/Grup saya Terlebih dahulu untuk Melihat File yang saya Bagikan\n\nSilakan Join Ke Channel & Group Terlebih Dahulu</b>"
+            text = "<b>Hello {user}\n\nAnda Harus Bergabung Di Channel / Grup Saya Terlebih Dahulu\n\nSilahkan Bergabung Channel Dan Jangan Keluar Lagi Dari Channel\n\nSetelah Bergabung Langsung Klik Coba Lagi Untuk Mendapatkan Media Dari Bot Ini .. .. ..</b>"
         try:
             buttons = await start_button(c)
             await m.reply(
@@ -218,7 +218,7 @@ async def start_bots(c, m):
     if msgs:
         text = msgs
     else:
-        text = "<b>Hello {user}\n\nAnda harus bergabung di Channel/Grup saya Terlebih dahulu untuk Melihat File yang saya Bagikan\n\nSilakan Join Ke Channel & Group Terlebih Dahulu</b>"
+        text = "<b>Hello {user}\n\nAnda Harus Bergabung Di Channel / Grup Saya Terlebih Dahulu\n\nSilahkan Bergabung Channel Dan Jangan Keluar Lagi Dari Channel\n\nSetelah Bergabung Langsung Klik Coba Lagi Untuk Mendapatkan Media Dari Bot Ini .. .. ..</b>"
     try:
         await m.reply(
             text.format(user=m.from_user.mention),
@@ -258,7 +258,7 @@ async def cek_id(c, m):
 @bot.on_callback_query(filters.regex("about"))
 async def about(_, callback_query):
     await callback_query.message.edit(
-        text=f"<b><u>💎 FSUB PREMIUM BOT 💎</u></b>\n\n@FsubDeployerBot adalah bot yang berfungsi untuk menciptakan bot file sharing atau bot fsub dengan mudah dan simple.\nDengan membuat file sharing melalui FSUB DEPLOYER ini, anda mempunyai hak penuh atas bot anda sendiri (bisa broadcast, ganti² fsub, tambah admin dll) dan bisa melakukan perubahan setting langsung di bot..\n\n➲ ᴅɪᴋᴇʟᴏʟᴀ ᴏʟᴇʜ - @stereoproject\n➲ ʙᴏᴛ ʙʏ - @{_.me.username}",
+        text=f"<b><u>💎 PREMIUM FSUB BOT 💎</u></b>\n\nini adalah bot yang berfungsi untuk menciptakan bot file sharing atau bot fsub dengan mudah dan simple.\nDengan membuat file sharing melalui bot ini, anda mempunyai hak penuh atas bot anda sendiri (bisa broadcast, ganti² fsub, tambah admin dll) dan bisa melakukan perubahan setting langsung di bot..\n\n➲ support by - @RACUN_SHOPEE101\n➲ bot by - @{_.me.username}",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -277,10 +277,10 @@ async def tutor(_, callback_query):
             [
                 [
                     InlineKeyboardButton(
-                        "🛑 ᴀᴘᴘ_ɪᴅ & ᴀᴘᴘ_ʜᴀsʜ", url="https://t.me/scrapmanbot"
+                        "🛑 ᴀᴘᴘ_ɪᴅ & ᴀᴘᴘ_ʜᴀsʜ", url="https://my.telegram.org/auth"
                     ),
                     InlineKeyboardButton(
-                        "sᴜᴘᴘᴏʀᴛ ʙʏ ✨", url="https://t.me/stereoproject"
+                        "sᴜᴘᴘᴏʀᴛ ʙʏ ✨", url="https://t.me/RACUN_SHOPEE101"
                     ),
                 ],
                 [
@@ -312,7 +312,7 @@ async def deploy_fsub_bot(c, callback_query):
         keyboard: List[InlineKeyboardButton] = []
         but = []
         for i in range(len(jancok)):
-            list_admin = f"⛑️ sᴇʟʟᴇʀ {i+1}"
+            list_admin = f"⛑️ ᴀᴅᴍɪɴ {i+1}"
             id_admin = jancok[i]
             keyboard.append(
                 InlineKeyboardButton(
@@ -323,7 +323,7 @@ async def deploy_fsub_bot(c, callback_query):
         but.append(InlineKeyboardButton("❮ Kembali", callback_data="back_start"))
         buttons.add(*keyboard + but)
         await callback_query.message.edit(
-            "<b>Anda bukan bagian dari pengguna yang di ijinkan untuk menggunakan perintah ini\nSilahkan hubungi seller dibawah ini jika anda ingin membuat bot File sharing melalui BOT ini.</b>",
+            "<b>Anda bukan bagian dari pengguna yang di ijinkan untuk menggunakan perintah ini\nSilahkan hubungi admin dibawah ini jika anda ingin membuat bot File sharing melalui BOT ini.</b>",
             reply_markup=buttons,
         )
         return
@@ -583,7 +583,7 @@ async def helper_text(c, m):
 ├ /setting - Untuk menambahkan lain-lain
 └ /users - Untuk melihat statistik pengguna bot.
 
-➲ ᴅɪᴋᴇʟᴏʟᴀ ᴏʟᴇʜ - </b><a href='https://t.me/Ritestimonich'>𝗥𝗜𝗘𝗦𝗛𝗢𝗣 ☕</a>
+➲ ᴅɪᴋᴇʟᴏʟᴀ ᴏʟᴇʜ - </b><a href='https://t.me/RACUN_SHOPEE101'>𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘</a>
  '''
         await m.reply(help_owner)
 
@@ -704,7 +704,7 @@ async def member_prem(c, m):
         return
     if len(m.command) < 2:
         return await m.reply(
-            "<b>Masukan user ID pembuat, untuk mendeploy di @FsubDeployerBot\ncontoh : /ultra 883761960</b>"
+            "<b>Masukan user ID pembuat, untuk mendeploy di @JayXRobot\ncontoh : /ultra 1944309678</b>"
         )
     iya = await seller_info(m.from_user.id)
     if not iya and m.from_user.id not in ADMINS:
@@ -721,7 +721,7 @@ async def member_prem(c, m):
 async def add_aktif_bot(c, m):
     if len(m.command) < 3:
         return await m.reply(
-            "<b>Masukan ID bot yang ingin ditambah masa aktifnya, 1 sama dengan 1 hari\nContoh : /addultra 883761960 30</b>"
+            "<b>Masukan ID bot yang ingin ditambah masa aktifnya, 1 sama dengan 1 hari\nContoh : /addultra 1944309678 30</b>"
         )
     iya = await seller_info(m.from_user.id)
     if not iya and m.from_user.id not in ADMINS:
@@ -925,7 +925,7 @@ async def get_uptime(client, m: Message):
 async def cb_tentang(c, query: CallbackQuery):
     try:
         await query.message.edit(
-            text=f"Tentang Bot ini:\n\n@{c.me.username} Adalah Bot Telegram Untuk Menyimpan Postingan Atau File Yang Dapat Diakses Melalui Link Khusus.\n\n➲ ᴄʀᴇᴀᴛᴏʀ : [ᴋʟɪᴋ ᴅɪsɪɴɪ](tg://settings)\n➲ sᴜᴘᴘᴏʀᴛ ʙʏ : [𝙎𝙏𝙀𝙍𝙀𝙊 𝙋𝙍𝙊𝙅𝙀𝘾𝙏](https://t.me/stereoproject)\n➲ ᴘᴏᴡᴇʀᴇᴅ ʙʏ : [𝗙𝗦𝗨𝗕 𝗗𝗘𝗣𝗟𝗢𝗬𝗘𝗥](https://t.me/FsubDeployerBot)", 
+            text=f"Tentang Bot ini:\n\n@{c.me.username} Adalah Bot Telegram Untuk Menyimpan Postingan Atau File Yang Dapat Diakses Melalui Link Khusus.\n\n➲ ᴄʀᴇᴀᴛᴏʀ : [ᴋʟɪᴋ ᴅɪsɪɴɪ](https://s.id/Tentang-Saya)\n➲ sᴜᴘᴘᴏʀᴛ ʙʏ : [𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘](https://t.me/RACUN_SHOPEE101)", 
             reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -950,7 +950,7 @@ async def cb_kembali_aja(c, query):
 async def add_max_bot(c, m):
     if len(m.command) < 3:
         return await m.reply(
-            "<b>Masukan ID bot yang ingin ditambah Fsub nya, dan jumlah Fsub nya\nContoh : /maxsub 883761960 4</b>"
+            "<b>Masukan ID bot yang ingin ditambah Fsub nya, dan jumlah Fsub nya\nContoh : /maxsub 1944309678 4</b>"
         )
     iya = await seller_info(m.from_user.id)
     if not iya and m.from_user.id not in ADMINS:
