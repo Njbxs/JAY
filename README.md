@@ -7,6 +7,7 @@
 `pip3 install -r req.txt`
 
 `cp sample.env .env`
-screen -S
+
+`screen -S`
 
 `bash run`
