@@ -6,7 +6,7 @@
 
 `python3 -m venv jay`
 
-`. . /jay/bin/activate`
+`. ./jay/bin/activate`
 
 `pip3 install -r req.txt`
 
