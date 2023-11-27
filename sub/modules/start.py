@@ -1,6 +1,7 @@
 #
-# Copyright (C) 2023 by stereoproject
+# Copyright (C) 2023 by t.me/stereoproject
 # All rights reserved.
+
 
 import asyncio
 import logging
@@ -56,7 +57,7 @@ start_msg = """
 <b>Hallo {}, saya adalah {} 
 yang mempermudah kalian untuk membuat file sharing bot 
 tanpa harus memiliki vps/heroku sendiri
-Silahkan klik tombol dibawah ini untuk memulainya\n\nNote : Jika kamu tidak bisa mendeploy sendiri, kamu bisa menghubungi salah satu admin yang tertera di bot ini</b>
+Silahkan klik tombol dibawah ini untuk memulainya\n\nNote : Jika anda tidak bisa mendeploy sendiri, Anda bisa menghubungi salah satu admin kami yang tertera di bot ini</b>
 """
 
 but_tutor = [
@@ -87,7 +88,7 @@ async def start_bot(c, m):
     av = await timer_info(c.me.id)
     time = datetime.now().strftime("%d-%m-%Y")
     if av == time:
-        print(f"@{c.me.username} Telah habis Mohon Tunggu, Bot sedang direstart")
+        print(f"@{c.me.username} Telah habis Mohon Tunggu, Bot Sedang Direstart ♻️")
         await remove_bot(str(c.me.id))
         await del_timer(c.me.id)
         os.popen(f"rm {c.me.id}*")
@@ -218,7 +219,7 @@ async def start_bots(c, m):
     if msgs:
         text = msgs
     else:
-        text = "<b>Hello {user}\n\nAnda Harus Bergabung Di Channel / Grup Saya Terlebih Dahulu\n\nSilahkan Bergabung Channel Dan Jangan Keluar Lagi Dari Channel\n\nSetelah Bergabung Langsung Klik Coba Lagi Untuk Mendapatkan Media Dari Bot Ini .. .. ..</b>"
+            text = "<b>Hello {user}\n\nAnda Harus Bergabung Di Channel / Grup Saya Terlebih Dahulu\n\nSilahkan Bergabung Channel Dan Jangan Keluar Lagi Dari Channel\n\nSetelah Bergabung Langsung Klik Coba Lagi Untuk Mendapatkan Media Dari Bot Ini .. .. ..</b>"
     try:
         await m.reply(
             text.format(user=m.from_user.mention),
@@ -235,7 +236,7 @@ async def cek_id(c, m):
     if len(m.command) < 2:
         return await m.reply_photo(
             "https://telegra.ph/file/86fff250dda1c1d9b14cb.jpg",
-            caption="Silahkan kombinasikan dengan link tautan\ncontoh : /id https://t.me/stereoproject\natau\n/id https://t.me/c/728292989/77",
+            caption="Silahkan kombinasikan dengan link tautan\ncontoh : /id https://t.me/RACUN_SHOPEE101",
         )
     link = m.command[1]
     if not "t.me" in link:
@@ -258,7 +259,7 @@ async def cek_id(c, m):
 @bot.on_callback_query(filters.regex("about"))
 async def about(_, callback_query):
     await callback_query.message.edit(
-        text=f"<b><u>💎 PREMIUM FSUB BOT 💎</u></b>\n\nini adalah bot yang berfungsi untuk menciptakan bot file sharing atau bot fsub dengan mudah dan simple.\nDengan membuat file sharing melalui bot ini, anda mempunyai hak penuh atas bot anda sendiri (bisa broadcast, ganti² fsub, tambah admin dll) dan bisa melakukan perubahan setting langsung di bot..\n\n➲ support by - @RACUN_SHOPEE101\n➲ bot by - @{_.me.username}",
+        text=f"<b><u>💎 PREMIUM FSUB BOT 💎</u></b>\n\nini adalah bot yang berfungsi untuk membuat bot file sharing atau bot fsub dengan mudah dan simple.\nDengan membuat file sharing melalui bot ini, anda mempunyai hak penuh atas bot anda sendiri (bisa broadcast, ganti² fsub dan database, tambah admin dll) dan bisa melakukan perubahan setting langsung di bot..\n\n➲ support by - @RACUN_SHOPEE101\n➲ bot by - @{_.me.username}",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -433,15 +434,16 @@ async def deploy_fsub_bot(c, callback_query):
     await add_timer(cot.me.id, time)
     await add_admin(cot.me.id, admin_ids)
     anu = await c.send_message(
-        LOG_GRP,
-        "<b><u>🔥 BOT berhasil diaktifkan 🔥</u></b>\n"
-        f"• <b>Nama Bot:</b> {cot.me.first_name}\n"
-        f"• <b>Username:</b> @{cot.me.username}\n"
-        f"• <b>ID Bot:</b> <code> {cot.me.id}</code>\n"
-        f"• <b>Tanggal Exp:</b> <code>{time}</code>\n\n"
-        f"• <b>Pembuat:</b> {callback_query.from_user.mention}\n"
-        f"• <b>ID Pembuat:</b> <code>{callback_query.from_user.id}</code>",
-    )
+    LOG_GRP,
+    "<b><u>🔥 BOT Berhasil Diaktifkan 🔥</u></b>\n"
+    f"• <b>Nama Bot:</b> {cot.me.first_name}\n"
+    f"• <b>Username:</b> @{cot.me.username}\n"
+    f"• <b>ID Bot:</b> <code> {cot.me.id}</code>\n"
+    f"• <b>Tanggal Exp:</b> <code>{time}</code>\n\n"
+    f"• <b>Pembuat:</b> {callback_query.from_user.mention}\n"
+    f"• <b>ID Pembuat:</b> <code>{callback_query.from_user.id}</code>",
+)
+
     await c.pin_chat_message(LOG_GRP, anu.id)
     sinting = InlineKeyboardMarkup(
         [
@@ -492,6 +494,7 @@ async def deploy_fsub_bot(c, callback_query):
             "setting",
             "cancel",
             "cekbot",
+            "exp",
         ]
     )
 )
@@ -499,26 +502,40 @@ async def deploy_fsub_bot(c, callback_query):
 async def buat_konten(c, m):
     if c.me.id == BOT_ID:
         return
+
+    # Check owner and admin status
     cek = await cek_owner(c.me.id)
     adm = await admin_info(c.me.id, m.from_user.id)
     for i in cek:
         owner = i["owner"]
         dbc = i["channel"]
+
+    # Check subscription expiry
     av = await timer_info(c.me.id)
     time = datetime.now().strftime("%d-%m-%Y")
     if av == time:
-        print(f"@{c.me.username} Telah Habis Mohon Tunggu.. Bot sedang direstart 💞")
+        print(f"@{c.me.username} Telah Habis Mohon Tunggu.. Bot sedang direstart ♻️")
         await remove_bot(str(c.me.id))
         os.popen(f"rm {c.me.id}*")
         await restart()
+
+    # Check if the user is authorized
     if not adm and m.from_user.id != owner:
         return
+
+    # Reply to the user
     ppk = await m.reply("<code>Silahkan Tunggu sebentar...</code>")
+
+    # Copy the message to a channel
     iya = await m.copy(dbc)
     sagne = iya.id * abs(dbc)
     string = f"get-{sagne}"
     base64_string = await encode(string)
+
+    # Generate a link
     link = f"https://t.me/{c.me.username}?start={base64_string}"
+
+    # Create an inline keyboard for sharing the link
     reply_markup = InlineKeyboardMarkup(
         [
             [
@@ -529,11 +546,14 @@ async def buat_konten(c, m):
         ]
     )
 
+    # Edit the reply message with the link and keyboard
     await ppk.edit(
         f"<b>Link Sharing File Berhasil Di Buat:</b>\n\n{link}",
         reply_markup=reply_markup,
     )
+
     try:
+        # Try to edit the original message's reply markup
         await iya.edit_reply_markup(reply_markup)
     except Exception:
         pass
@@ -545,7 +565,7 @@ async def helper_text(c, m):
         jancok = await cek_seller()
         if m.from_user.id in jancok:
             return await m.reply(
-                    "<b>Daftar Perintah:</b>\n\n/ultra - Untuk akses deploy user\n/addultra - Untuk set masa aktif bot\n/ultraaktif - Untuk cek masa aktif bot\n/maxsub - untuk menentukan batas sub"
+                    "<b>Daftar Perintah:</b>\n\n/ultra - Untuk akses deploy user\n/addultra - Untuk set masa aktif bot\n/ultraaktif - Untuk cek masa aktif bot\n/maxsub - untuk menentukan batas Fsub"
                 )
     cek = await cek_owner(c.me.id)
     adm = await admin_info(c.me.id, m.from_user.id)
@@ -583,7 +603,7 @@ async def helper_text(c, m):
 ├ /setting - Untuk menambahkan lain-lain
 └ /users - Untuk melihat statistik pengguna bot.
 
-➲ ᴅɪᴋᴇʟᴏʟᴀ ᴏʟᴇʜ - </b><a href='https://t.me/RACUN_SHOPEE101'>𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘</a>
+➲ sᴜᴘᴘᴏʀᴛ ʙʏ : </b><a href='https://t.me/RACUN_SHOPEE101'>𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘</a>
  '''
         await m.reply(help_owner)
 
@@ -592,7 +612,7 @@ async def helper_text(c, m):
             "📋 <b>Daftar Perintah</b>\n\n/users - Untuk cek pengunjung bot\n/broadcast - Untuk kirim pesan broadcast ke pengunjung bot\n/batch - Untuk membuat link lebih dari satu file\n/genlink - buat tautan untuk satu posting\n/protect - True untuk protect False untuk off"
         )
     else:
-        await m.reply("Maaf ini bukan untuk anda.")
+        await m.reply("Hanya owner & admin yang dapat menggunakan perintah itu\n© @RACUN_SHOPEE101")
 
 
 @bot.on_message(
@@ -625,6 +645,7 @@ async def helper_text(c, m):
             "setting",
             "cancel",
             "cekbot",
+            "exp",
         ]
     )
 )
@@ -632,15 +653,23 @@ async def helper_text(c, m):
 async def post_channel(c, m):
     if c.me.id == BOT_ID:
         return
+
+    # Check the owner and channel information
     cek = await cek_owner(c.me.id)
     for i in cek:
         dbc = i["channel"]
+
+    # Check if the message is in the correct channel
     if m.chat.id != dbc:
         return
+
+    # Convert the message ID and channel ID to create a unique link
     converted_id = m.id * abs(dbc)
     string = f"get-{converted_id}"
     base64_string = await encode(string)
     link = f"https://t.me/{c.me.username}?start={base64_string}"
+
+    # Create an inline keyboard for sharing the link
     reply_markup = InlineKeyboardMarkup(
         [
             [
@@ -650,24 +679,32 @@ async def post_channel(c, m):
             ]
         ]
     )
+
     try:
+        # Try to edit the message's reply markup with the inline keyboard
         await m.edit_reply_markup(reply_markup)
     except Exception:
         pass
 
 
-@bot.on_message(filters.command("del") & filters.user(ADMINS))
+
+@bot.on_message(filters.command("del"))
 async def del_users(c, m):
     if c.me.id != BOT_ID:
         return
     if len(m.command) < 2:
-        return await m.reply("Silahkan kombinasikan dengan ID")
+        return await m.reply("Silahkan kombinasikan dengan ID"
+        )
+    iya = await seller_info(m.from_user.id)
+    if not iya and m.from_user.id not in ADMINS:
+        return  
     ids = m.command[1]
     await remove_bot(str(ids))
     await del_owner(int(ids))
     await del_timer(int(ids))
-    await m.reply(f"Hapus data untuk id {ids}")
+    await m.reply(f"Hapus data untuk ID bot {ids}")
     os.popen(f"rm {ids}*")
+    # Restart the bot
     await restart()
 
 
@@ -683,7 +720,7 @@ async def ya_setting_bot(c, m):
         return
     if len(m.command) < 2:
         return await m.reply(
-            "Silahkan kombinasikan dengan ID channel database\ncontoh : /addbase -100123456789"
+            "Silahkan kombinasikan dengan ID channel database yang berawalan -100\ncontoh : /addbase -100123456789"
         )
     ids = int(m.command[1])
     try:
@@ -739,7 +776,7 @@ async def cek_member_prem(c, m):
     if not iya and m.from_user.id not in ADMINS:
         return
     anu = await cek_prem()
-    msg = "<b><u>💎 List Fsub Premium Bot</u></b>\n\n"
+    msg = "<b><u>✅ Daftar BOT yg Aktif</u></b>\n\n"
     ang = 0
     for ex in anu:
         try:
@@ -755,7 +792,7 @@ async def cancel(callback_query, text):
     if text.startswith("/"):
         await bot.send_message(
             callback_query.from_user.id,
-            "⁉️ <b>Proses di batalkan, silahkan coba lagi</b>",
+            "⁉️ <b>Proses telah di batalkan, silahkan coba lagi</b>",
         )
         return True
     else:
@@ -793,16 +830,16 @@ async def _(c, callback_query):
         ]
         pesan = await c.ask(
             user_id,
-            "<b>Silahkan Kirimkan Pesan Apapun Untuk Menghubungi Seller</b>",
+            "<b>Silahkan Kirimkan Pesan Apapun Untuk Menghubungi Admin Kami</b>",
             reply_markup=InlineKeyboardMarkup(buttons),
             timeout=60,
         )
         await c.send_message(
-            user_id, "💬 Pesan Anda Telah Dikirim Ke Seller ✅\nSilahkan Tunggu Balasan"
+            user_id, "💬 Pesan Anda Telah Dikirim Ke Admin Kami ✅\nSilahkan Tunggu Balasan"
         )
         await callback_query.message.delete()
     except asyncio.TimeoutError:
-        return await c.send_message(user_id, "<b>Pembatalkan otomatis</b>")
+        return await c.send_message(user_id, "<b>Pembatalan pesan otomatis</b>")
     button = [
         [
             InlineKeyboardButton(full_name, user_id=user_id),
@@ -833,11 +870,11 @@ async def _(c, callback_query):
             )
             await c.send_message(
                 user_id,
-                "✅ <code>Pesan Anda Telah Dikirim Ke Seller\nSilahkan Tunggu Balasan</code>",
+                "✅ <code>Pesan Anda Telah Dikirim Ke Admin kami \nSilahkan Tunggu Balasan</code>",
             )
             await callback_query.message.delete()
         except asyncio.TimeoutError:
-            return await c.send_message(user_id, "<b>Pembatalkan otomatis</b>")
+            return await c.send_message(user_id, "<b>Pembatalkan pesan otomatis</b>")
         buttons = [
             [
                 InlineKeyboardButton(full_name, user_id=user_id),
@@ -866,7 +903,7 @@ async def _(c, callback_query):
             )
             await callback_query.message.delete()
         except asyncio.TimeoutError:
-            return await c.send_message(LOG_GRP, "<b>Pembatalkan otomatis</b>")
+            return await c.send_message(LOG_GRP, "<b>Pembatalkan pesan otomatis</b>")
         buttons = [
             [
                 InlineKeyboardButton("Jawab 💬", callback_data=f"jawab_pesan {LOG_GRP}"),
@@ -925,7 +962,7 @@ async def get_uptime(client, m: Message):
 async def cb_tentang(c, query: CallbackQuery):
     try:
         await query.message.edit(
-            text=f"Tentang Bot ini:\n\n@{c.me.username} Adalah Bot Telegram Untuk Menyimpan Postingan Atau File Yang Dapat Diakses Melalui Link Khusus.\n\n➲ ᴄʀᴇᴀᴛᴏʀ : [ᴋʟɪᴋ ᴅɪsɪɴɪ](https://s.id/Tentang-Saya)\n➲ sᴜᴘᴘᴏʀᴛ ʙʏ : [𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘](https://t.me/RACUN_SHOPEE101)", 
+            text=f"Tentang Bot ini:\n\n@{c.me.username} Adalah Bot Telegram Untuk Menyimpan Postingan Atau File Yang Dapat Diakses Melalui Link Khusus.\n\n➲ ᴄʀᴇᴀᴛᴏʀ : [ᴋʟɪᴋ ᴅɪsɪɴɪ](https://s.id/Tentang-Saya)\n➲ sᴜᴘᴘᴏʀᴛ ʙʏ : [𝗥𝗔𝗖𝗨𝗡 𝗦𝗛𝗢𝗣𝗘𝗘](https://t.me/RACUN_SHOPEE101)",
             reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -961,53 +998,69 @@ async def add_max_bot(c, m):
     await m.reply(f"<b>Bot ID:</b> {ids}\n<b>Max Sub:</b> {h}")
 
 
-@bot.on_message(filters.command('set_start'))
+@bot.on_message(filters.command("setstart"))
 async def set_start_msg(c: Client, m: Message):
     if c.me.id == BOT_ID:
         return
+
     r = m.reply_to_message
     if r:
         if '{user}' not in r.text:
-            return await m.reply("Format yg anda berikan salah.\n\nSilahkan gunakan contoh seperti ini.\nHello {user} silahkan klik grup/channel terlebih dahulu.")
+            return await m.reply("<b>Format yang Anda berikan salah.\n\nSilakan gunakan contoh seperti ini:\nHello {user}, silakan klik grup/channel terlebih dahulu untuk menonton video yang saya bagikan melalui bot ini.</b>")
         else:
             await set_start(user_id=c.me.id, caption=r.text)
-            await m.reply(f'''
-Pesan start bot anda berhasil di atur.
-
-<code>{r.text}</code>
-'''
-            )
-            return
+            return await m.reply(f"Pesan start bot Anda berhasil diatur:\n\n<code>{r.text}</code>")
     else:
-        await m.reply("Silahkan balas ke pesan.")
-        return
+        return await m.reply("<b>Silakan balas ke pesan yang ingin Anda jadikan pesan start.</b>")
 
 
-@bot.on_message(filters.command('exp'))
+@bot.on_message(filters.command("exp"))
 async def update_expired(c: Client, m: Message):
     if c.me.id != BOT_ID:
         return
+    
+    if len(m.command) < 3:
+        await m.reply("<b>Masukan ID bot yang ingin dipebarui masa aktifnya\nContoh : /exp 1944309678 1\n[Durasi 1=perbulan]</b>")
+        return
+    
+    iya = await seller_info(m.from_user.id)
+    if not iya and m.from_user.id not in ADMINS:
+        return
+    
     target = m.command[1]
     arg = m.text.split(None, 2)[2]
-    date = 30 * int(arg)
-    time = (datetime.now() + timedelta(int(date))).strftime("%d-%m-%Y")
+    
+    try:
+        date = 30 * int(arg)
+    except ValueError:
+        await m.reply("<b>Durasi harus berupa angka (1 = perbulan)</b>")
+        return
+
+    new_expiration_date = (datetime.now() + timedelta(days=int(date))).strftime("%d-%m-%Y")
+    
     check = await timer_info(int(target))
     if "Belum" not in check:
-        xx = await m.reply(f"<b>Pengguna {int(target)} ditemukan dengan tanggal kedaluwarsa {check}.</b>\n<b>Memperbarui Tanggal Kedaluwarsa.</b>")
-        await add_timer(int(target), time)
-        await asyncio.sleep(2)
-        await xx.edit(f"<b>Berhasil Memperbarui Kedaluwarsa.</b>\n\n<b>User ID:</b> {int(target)}\n<b>Date:</b> {time}")
-        return
+        try:
+            await add_timer(int(target), new_expiration_date)
+            await asyncio.sleep(2)
+            await m.reply(f"<b>🟢 Berhasil memperbarui masa aktif bot.\n\nID bot: {int(target)}\nTanggal baru: {new_expiration_date}</b>")
+        except Exception as e:
+            await m.reply(f"Gagal memperbarui masa aktif bot. Kesalahan: {str(e)}")
     else:
-        pass
+        await m.reply(f"<b>Bot dengan ID {int(target)} tidak ditemukan atau belum memiliki masa aktif yang diatur.</b>")
+
 
 
 @bot.on_callback_query(filters.regex("telah_aktif"))
-async def _(client, callback_query):
-    user_ids = int(callback_query.data.split()[1])
-    bot_user = callback_query.data.split()[2]
-    await client.send_message(user_ids, f"🔥 Bot berhasil diaktifkan, silahkan start bot anda @{bot_user}")
-    await callback_query.message.edit("<b>Pesan telah di kirim</b>")
+async def activate_bot(client, callback_query):
+    try:
+        user_ids = int(callback_query.data.split()[1])
+        bot_username = callback_query.data.split()[2]
+        await client.send_message(user_ids, f"<b>🔥 Bot anda telah berhasil diaktifkan!🔥\nSilakan mulai bot anda @{bot_username}</b>")
+        await callback_query.message.edit("<b>Pesan berhasil dikirim ke pengguna.</b>")
+    except Exception as e:
+        print(f"Error processing callback query: {str(e)}")
+
 
 
 @bot.on_callback_query(filters.regex("tutup"))
@@ -1015,5 +1068,5 @@ async def cb_tutup(c, query: CallbackQuery):
     try:
         await query.answer()
         await query.message.delete()
-    except BaseException as e:
-        logs.info(e)
+    except Exception as e:
+        logs.error(f"Error handling 'tutup' callback: {str(e)}")
